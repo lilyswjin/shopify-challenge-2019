@@ -5,7 +5,17 @@
 body {
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 300;
-  height: 100%;
+}
+
+.App {
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .header {
@@ -27,5 +37,42 @@ body {
 .header__title {
   color: white;
   font-size: 2.5rem;
+}
+
+.main {
+  min-height: 75vh;
+}
+
+.search {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 1rem;
+}
+
+.search__bar {
+  width: 90%;
+  font-size: 1.5rem;
+  border: 1px grey solid;
+}
+
+.search__button {
+  background-color: #178543;
+}
+
+.search__button i {
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+  color: white;
+}
+
+.favorites {
+  background-color: #f5fff5;
+  height: 100%;
+}
+
+.favorites h2 {
+  color: #178543;
 }
 /*# sourceMappingURL=App.css.map */

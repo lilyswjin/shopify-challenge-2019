@@ -2,6 +2,7 @@
 
 $color-blue: rgb(23, 67, 133);
 $color-green: rgb(23, 133, 67);
+$color-lightgreen: rgb(245, 255, 245);
 
 // global styles 
 
@@ -12,7 +13,13 @@ $color-green: rgb(23, 133, 67);
 body {
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
   font-weight: 300;
-  height: 100%;
+
+}
+
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 // header styles
@@ -28,4 +35,40 @@ body {
     color: white;
     font-size: 2.5rem;
   }
+}
+
+// main body styles
+
+.main {
+  min-height: 75vh;
+}
+
+// searchbar styles 
+
+.search {
+  width: 100%;
+  display: flex;
+  padding: 1rem;
+  &__bar {
+    width: 90%;
+    font-size: 1.5rem;
+    border: 1px grey solid;
+  }
+  &__button {
+    background-color: $color-green;
+    i {
+      transform: rotate(90deg);
+      color: white;
+    }
+  }
+}
+
+// favourite styles 
+
+.favorites {
+  background-color: $color-lightgreen;
+  height: 100%;
+  h2 {
+    color: $color-green;
+  } 
 }
