@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import Result from './Result';
 import Favorite from './Favorite';
+import { isAlpha } from 'validator';
 
 export default class Search extends Component {
 
     state = {
         search: "",
         results: [],
-        favs: []
+        favs: [],
+        error: ""
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -15,7 +17,8 @@ export default class Search extends Component {
 
         if (search === "" && prevState.search !== "") {
             this.setState({
-                results: []
+                results: [],
+                error: ""
             })
         }
     }
@@ -28,7 +31,14 @@ export default class Search extends Component {
 
     handleSubmit = ( e ) => {
         e.preventDefault();
-        this.getWasteData();
+        let { search } = this.state;
+        if ( isAlpha(search)) {
+            this.getWasteData();
+        } else {
+            this.setState({
+                error: "Please use valid characters in search (no numbers or special characters!)"
+            })
+        }
     }
 
     // fetch complete list of waste data from json object
@@ -52,9 +62,15 @@ export default class Search extends Component {
             return (keywords.test(item.keywords))
         })
 
-        this.setState({
-            results: result
-        })
+        if (result.length) {
+            this.setState({
+                results: result
+            })
+        } else {
+            this.setState({
+                error: "No results found."
+            })
+        }
     }
 
     addFavorite = ( e ) => {
@@ -94,11 +110,6 @@ export default class Search extends Component {
         })
     }
 
-    // validates user input to disallow special symbols
-    isValidSearch = () => {
-        
-    }
-
     render() {
 
         return (
@@ -108,6 +119,7 @@ export default class Search extends Component {
                         <input className="search__bar" type="search" id="site-search" onChange={this.handleChange} value={this.state.search} ></input>
                         <button className="search__button" onClick={this.handleSubmit}><i className="fas fa-search"></i></button>
                     </form>
+                    <div className="search__msg">{this.state.error}</div>
                     <Result data={this.state.results} favs={this.state.favs} addFavorite={this.addFavorite} />
                 </div>
                 <Favorite favs={this.state.favs} removeFavorite={this.removeFavorite} />
