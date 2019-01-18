@@ -6,34 +6,32 @@ export default class Favorite extends Component {
     render() {
         let { favs, removeFavorite } = this.props;
 
-        let rows = <tbody></tbody>
+        let rows = <div></div>
 
         if (favs.length) {
             rows = favs.map((( row, i ) => {
                 let decodedBody = new DOMParser().parseFromString(row.body, 'text/html').body.textContent;
 
                 return (
-                    <tbody key={uuidv1()}>
-                        <tr>
-                            <td className="favorite">
-                                <i onClick={removeFavorite} id={i} className="fas fa-star"></i>
-                            </td>
-                            <td>
-                                {row.title}
-                            </td>
-                            <td dangerouslySetInnerHTML={{__html: decodedBody}}/>
-                        </tr>
-                    </tbody>
+                    <div style={{display: "table-row"}} className="table-row" key={uuidv1()}>
+                        <div style={{display: "table-cell"}} className="table-cell">
+                            <i onClick={removeFavorite} id={i} className="fas fa-star favorited-item"></i>
+                        </div>
+                        <div style={{display: "table-cell"}} className="table-cell">
+                            {row.title}
+                        </div>
+                        <div style={{display: "table-cell"}} className="table-cell" dangerouslySetInnerHTML={{__html: decodedBody}}/>
+                    </div>
                 )
             }))
         } 
 
         return (
-            <div className="favorites">
+            <div className="favorites-section">
                 <h2>Favourites</h2>
-                <table className="favorites__result">
+                <div style={{display: "table"}} className="favorites__table">
                     {rows}
-                </table>
+                </div>
             </div>
         )
     }

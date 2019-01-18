@@ -94,15 +94,22 @@ export default class Search extends Component {
         })
     }
 
+    // validates user input to disallow special symbols
+    isValidSearch = () => {
+        
+    }
+
     render() {
 
         return (
             <div className="main">
-                <form className="search" >
-                    <input className="search__bar" type="search" id="site-search" onChange={this.handleChange} value={this.state.search} ></input>
-                    <button className="search__button" onClick={this.handleSubmit}><i className="fas fa-search"></i></button>
-                </form>
-                <Result data={this.state.results} addFavorite={this.addFavorite} />
+                <div className="section-results">
+                    <form className="search" >
+                        <input className="search__bar" type="search" id="site-search" onChange={this.handleChange} value={this.state.search} ></input>
+                        <button className="search__button" onClick={this.handleSubmit}><i className="fas fa-search"></i></button>
+                    </form>
+                    <Result data={this.state.results} favs={this.state.favs} addFavorite={this.addFavorite} />
+                </div>
                 <Favorite favs={this.state.favs} removeFavorite={this.removeFavorite} />
             </div>
         )
